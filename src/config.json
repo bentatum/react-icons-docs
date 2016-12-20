@@ -1,0 +1,23 @@
+
+[
+  {
+    "name": "FontAwesome",
+    "lib": "fa"
+  },
+  {
+    "name": "Typicons",
+    "lib": "ti"
+  },
+  {
+    "name": "Material Design Icons",
+    "lib": "md"
+  },
+  {
+    "name": "Github Octicons",
+    "lib": "go"
+  },
+  {
+    "name": "Ionicons",
+    "lib": "io"
+  }
+]
