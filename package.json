@@ -71,7 +71,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "deploy": "npm run build && aws s3 sync ./build s3://react-icons-docs --exclude '.DS_Store' --profile home --cache-control \"max-age=604800\" --expires 2100-01-01T00:00:00Z"
+    "deploy": "npm run build && aws s3 sync ./build s3://react-icons-docs --exclude '.DS_Store' --profile home --cache-control \"max-age=604800\" --expires 2100-01-01T00:00:00Z",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id E252GHWA4WSASZ --paths \"/*\" --profile home"
   },
   "jest": {
     "collectCoverageFrom": [
