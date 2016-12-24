@@ -21,8 +21,11 @@ export default class LibrarySelector extends React.Component {
   render () {
     return (
       <Select
-        defaultValue={this.props.selectedLib || this.props.currentLib}
+        defaultValue={this.props.selectedLib || this.props.currentLib || 'all'}
         onChange={e => this.props.selectLib(e.target.value)}>
+        <option value='all'>
+          All
+        </option>
         {config.map((item, key) =>
           <option key={key} value={kebabCase(item.name)}>
             {item.name}

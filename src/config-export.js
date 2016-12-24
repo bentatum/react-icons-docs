@@ -5,4 +5,5 @@ import * as md from 'react-icons/lib/md'
 import * as go from 'react-icons/lib/go'
 import * as io from 'react-icons/lib/io'
 
-export default { fa, ti, md, go, io }
+export const libs = { fa, ti, md, go, io }
+export const all = { ...fa, ...ti, ...md, ...go, ...io }

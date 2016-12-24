@@ -105,7 +105,7 @@ export default class IconGrid extends React.Component {
               key={key}
               className={css(styles.col)}>
               <IconCard  
-                libCode={libCode}
+                libCode={libCode || icon.name.substring(0, 2).toLowerCase()}
                 el={icon.el}
                 name={icon.name}
                 size={30} />
