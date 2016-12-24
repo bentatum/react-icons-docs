@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'aphrodite/no-important'
-import { scale, colors, fontSizes } from './constants'
+import { scale, colors, fontSizes, borderRadius } from './constants'
 
 const GLOBALS = 'react-icons-docs/theme/globals'
 
@@ -55,7 +55,9 @@ const styles = extended.StyleSheet.create({
       color: colors.gray,
       padding: scale[1],
       fontSize: fontSizes[5],
-      fontWeight: 300
+      fontWeight: 300,
+      height: 40,
+      borderRadius
     },
     input: {
       color: colors.black

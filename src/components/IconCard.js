@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     padding: scale[0],
     borderStyle: 'solid',
     position: 'relative'
+  },
+  icon: {
+    height: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
@@ -31,10 +37,12 @@ export default enhance(({ el, showCopy, setShowCopy, name, libCode }) => {
     })
   }
 
+  // console.log(name, libCode)
+
   return (
     <CopyToClipboard text={fullPath} onCopy={onCopy}>
       <div className={css(styles.outer)}>
-        <div className={css(util.mb1)}> 
+        <div className={css(styles.icon, util.mb1)}> 
           {React.createElement(el, { size: 30 })}
         </div>
         <IconPath showCopy={showCopy} fullPath={fullPath} />

@@ -10,6 +10,7 @@ import withState from 'recompose/withState'
 import { iconMap, searchFilter } from '../helpers'
 import { scale, breakpoints } from '../theme/constants'
 import { StyleSheet, css } from 'aphrodite/no-important'
+import pure from 'recompose/pure'
 
 const styles = StyleSheet.create({
   col: {
@@ -26,15 +27,25 @@ const styles = StyleSheet.create({
 
 @connect(({ query }) => ({ query }))
 @withState('renderedIcons', 'setRenderedIcons', [])
+@pure
 export default class IconGrid extends React.Component {
 
-  constructor (props) {
-    super(props)
+  initializeLib () {
     this.cachedChunk = null // to save current chunk of icons when searching
     this.chunkLength = 100
     this.currentChunk = 0
-    this.allIcons = iconMap(props.lib)
+    this.allIcons = iconMap(this.props.lib)
     this.chunkedIcons = chunk(this.allIcons, this.chunkLength)
+
+    if (!this.props.query) {
+      const initialChunk = this.chunkedIcons[this.currentChunk]
+      this.props.setRenderedIcons(initialChunk)
+    } else {
+      this.props.setRenderedIcons(this.allIcons)
+    }
+
+    window.removeEventListener('scroll', this.scrollListener)
+    window.addEventListener('scroll', this.scrollListener)
   }
 
   @autobind
@@ -57,21 +68,14 @@ export default class IconGrid extends React.Component {
   }
 
   componentDidMount () {
-    if (!this.props.query) {
-      const initialChunk = this.chunkedIcons[this.currentChunk]
-      this.props.setRenderedIcons(initialChunk)
-    } else {
-      this.props.setRenderedIcons(this.allIcons)
-    }
-
-    window.addEventListener('scroll', this.scrollListener)
+    this.initializeLib()
   }
 
   componentWillUnmount () {
     window.removeEventListener('scroll', this.scrollListener)
   }
 
-  componentWillUpdate (next) {
+  componentWillReceiveProps (next) {
     if (!this.props.query && next.query) {
       // we're searching, make all icons searchable
       this.cachedChunk = this.props.renderedIcons
@@ -80,6 +84,13 @@ export default class IconGrid extends React.Component {
       // we're done searching, render the previous chunk of icons
       this.props.setRenderedIcons(this.cachedChunk)
       this.cachedChunk = null
+    }
+  }
+
+  componentDidUpdate (next) {
+    if (this.props.libCode !== next.libCode) {
+      // new page, change the icons
+      this.initializeLib()
     }
   }
 

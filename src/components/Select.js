@@ -14,7 +14,9 @@ const styles = StyleSheet.create({
   },
   arrow: {
     position: 'absolute',
-    right: scale[0]
+    right: scale[0],
+    top: '50%',
+    marginTop: -8
   }
 })
 

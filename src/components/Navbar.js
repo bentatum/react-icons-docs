@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default () =>
+export default props =>
   <Headroom style={{ height }}>
     <div className={css(styles.outer)}>
       <Container>
@@ -77,7 +77,7 @@ export default () =>
           </div>
           <div className={css(styles.controls, util.flex, util.alignCenter)}>
             <div className={css(styles.controlsColumn, styles.controlsColumnL, util.pr0)}>
-              <LibrarySelector />
+              <LibrarySelector currentLib={props.currentLib} />
             </div>
             <div className={css(styles.controlsColumn, styles.controlsColumnR, util.pl0)}>
               <SearchInput />

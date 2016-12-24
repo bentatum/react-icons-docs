@@ -2,22 +2,27 @@
 [
   {
     "name": "FontAwesome",
-    "lib": "fa"
+    "lib": "fa",
+    "slug": "font-awesome"
   },
   {
     "name": "Typicons",
-    "lib": "ti"
+    "lib": "ti",
+    "slug": "typicons"
   },
   {
     "name": "Material Design Icons",
-    "lib": "md"
+    "lib": "md",
+    "slug": "material-design-icons"
   },
   {
     "name": "Github Octicons",
-    "lib": "go"
+    "lib": "go",
+    "slug": "github-octicons"
   },
   {
     "name": "Ionicons",
-    "lib": "io"
+    "lib": "io",
+    "slug": "ionicons"
   }
 ]

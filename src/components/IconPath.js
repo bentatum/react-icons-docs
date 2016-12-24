@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-    position: 'relative'
+    position: 'relative',
+    textAlign: 'center'
   }
 })
 

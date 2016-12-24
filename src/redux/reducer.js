@@ -4,7 +4,7 @@ export const SELECT_LIB = 'react-icons-docs/selectLib'
 
 const initialState = {
   query: null,
-  selectedLib: 'font-awesome'
+  selectedLib: null
 }
 
 export default function reducer (state = initialState, action = {}) {
