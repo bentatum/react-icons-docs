@@ -30,12 +30,11 @@ export default class IconGrid extends React.Component {
 
   constructor (props) {
     super(props)
-    this.chunkLength = 50
+    this.cachedChunk = null // to save current chunk of icons when searching
+    this.chunkLength = 100
     this.currentChunk = 0
-
-    const icons = iconMap(props.lib)
-    const filteredIcons = searchFilter(icons, props.query)
-    this.chunkedIcons = chunk(filteredIcons, this.chunkLength)
+    this.allIcons = iconMap(props.lib)
+    this.chunkedIcons = chunk(this.allIcons, this.chunkLength)
   }
 
   @autobind
@@ -57,9 +56,14 @@ export default class IconGrid extends React.Component {
     this.props.setRenderedIcons(nextRenderedIcons)
   }
 
-  componentDidMount() {
-    const initialChunk = this.chunkedIcons[this.currentChunk]
-    this.props.setRenderedIcons(initialChunk)
+  componentDidMount () {
+    if (!this.props.query) {
+      const initialChunk = this.chunkedIcons[this.currentChunk]
+      this.props.setRenderedIcons(initialChunk)
+    } else {
+      this.props.setRenderedIcons(this.allIcons)
+    }
+
     window.addEventListener('scroll', this.scrollListener)
   }
 
@@ -67,16 +71,30 @@ export default class IconGrid extends React.Component {
     window.removeEventListener('scroll', this.scrollListener)
   }
 
+  componentWillUpdate (next) {
+    if (!this.props.query && next.query) {
+      // we're searching, make all icons searchable
+      this.cachedChunk = this.props.renderedIcons
+      this.props.setRenderedIcons(this.allIcons)
+    } else if (this.cachedChunk && this.props.query && !next.query) {
+      // we're done searching, render the previous chunk of icons
+      this.props.setRenderedIcons(this.cachedChunk)
+      this.cachedChunk = null
+    }
+  }
+
   render () {
+    const { libCode, query, renderedIcons } = this.props
+    const icons = query ? searchFilter(renderedIcons, query) : renderedIcons
     return (
       <Container>
         <div className={css(util.flex, util.flexWrap, util.justifySpaceBetween)}>
-          {this.props.renderedIcons.map((icon, key) =>
+          {icons.map((icon, key) =>
             <div
               key={key}
               className={css(styles.col)}>
               <IconCard  
-                libCode={this.props.libCode}
+                libCode={libCode}
                 el={icon.el}
                 name={icon.name}
                 size={30} />
