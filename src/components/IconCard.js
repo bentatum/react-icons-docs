@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     borderColor,
     borderWidth,
     borderRadius,
-    padding: scale[1],
+    padding: scale[0],
     borderStyle: 'solid',
     position: 'relative'
   }
