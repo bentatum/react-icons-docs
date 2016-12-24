@@ -3,6 +3,7 @@ import React from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { scale, colors } from '../theme/constants'
 import { TweenLite } from 'gsap'
+import pure from 'recompose/pure'
 
 const styles = StyleSheet.create({
   path: {
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
   }
 })
 
+@pure
 export default class AnimatedIconPath extends React.Component {
   componentDidMount() {
     TweenLite.to(this.el, 2, { y: -100 })
