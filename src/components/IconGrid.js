@@ -99,7 +99,7 @@ export default class IconGrid extends React.Component {
     const icons = query ? searchFilter(renderedIcons, query) : renderedIcons
     return (
       <Container>
-        <div className={css(util.flex, util.flexWrap, util.justifySpaceBetween)}>
+        <div className={css(util.flex, util.flexWrap)}>
           {icons.map((icon, key) =>
             <div
               key={key}

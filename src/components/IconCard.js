@@ -37,8 +37,6 @@ export default enhance(({ el, showCopy, setShowCopy, name, libCode }) => {
     })
   }
 
-  // console.log(name, libCode)
-
   return (
     <CopyToClipboard text={fullPath} onCopy={onCopy}>
       <div className={css(styles.outer)}>
