@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { borderRadius, colors, scale } from '../theme/constants'
+import { scale } from '../theme/constants'
 import { StyleSheet, css } from 'aphrodite/no-important'
 import { Link } from 'react-router'
 import config from '../config'
