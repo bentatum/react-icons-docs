@@ -6,6 +6,7 @@ import { StyleSheet, css } from 'aphrodite'
 import logo from '../theme/images/logo-small.svg'
 import { colors, breakpoints } from '../theme/constants'
 import { MenuIcon, Container, SearchInput } from '.'
+import { connect } from 'react-redux'
 
 const height = 60
 
@@ -34,8 +35,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default props =>
-  <Headroom style={{ height }}>
+const enhance = connect(({ showMenu }) => ({ showMenu }))
+
+export default enhance(props => {
+  const content = (
     <div className={css(styles.outer)}>
       <Container>
         <div className={css(styles.inner, util.flex, util.alignCenter, util.justifySpaceBetween)}>
@@ -57,4 +60,15 @@ export default props =>
         </div>
       </Container>
     </div>
-  </Headroom>
+  )
+
+  if (!props.showMenu) {
+    return (
+      <Headroom style={{ height }}>
+        {content}
+      </Headroom>
+    )
+  }
+
+  return content
+})
