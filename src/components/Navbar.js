@@ -37,8 +37,10 @@ const styles = StyleSheet.create({
 
 const enhance = connect(({ showMenu }) => ({ showMenu }))
 
-export default enhance(props => {
-  const content = (
+export default enhance(props =>
+  <Headroom
+    style={{ height }}
+    disable={props.showMenu}>
     <div className={css(styles.outer)}>
       <Container>
         <div className={css(styles.inner, util.flex, util.alignCenter, util.justifySpaceBetween)}>
@@ -60,15 +62,5 @@ export default enhance(props => {
         </div>
       </Container>
     </div>
-  )
-
-  if (!props.showMenu) {
-    return (
-      <Headroom style={{ height }}>
-        {content}
-      </Headroom>
-    )
-  }
-
-  return content
-})
+  </Headroom>
+)
