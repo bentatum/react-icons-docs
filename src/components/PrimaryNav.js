@@ -9,26 +9,25 @@ import { kebabCase } from 'lodash'
 const styles = StyleSheet.create({
   outer: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   item: {
     margin: scale[1],
     padding: scale[1],
-    borderColor: colors.pink,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius,
     whiteSpace: 'nowrap'
   },
   active: {
-    backgroundColor: colors.pink,
-    color: colors.white
+    textDecoration: 'underline'
   }
 })
 
 const activeClassName = css(styles.active)
 
-const items = []
+const items = [{
+  children: 'All',
+  to: '/all',
+  activeClassName
+}]
 
 config.forEach(item => {
   items.push({
