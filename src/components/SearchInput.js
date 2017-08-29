@@ -4,6 +4,7 @@ import util from '../theme/utility'
 import { StyleSheet, css } from 'aphrodite'
 import { search } from '../redux/reducer'
 import { connect } from 'react-redux'
+import debounce from 'lodash.debounce'
 
 const styles = StyleSheet.create({
   outer: {
@@ -16,12 +17,20 @@ const styles = StyleSheet.create({
 
 const enhance = connect(() => ({}), { search })
 
-export default enhance(props =>
-  <div className={css(styles.outer, util.flex, util.alignCenter)}>
-    <input
-      type='search'
-      placeholder='Search'
-      className={css(styles.input)}
-      onChange={e => props.search(e.target.value)} />
-  </div>
-)
+class SearchInput extends React.Component {
+  handleChange = debounce(value => this.props.search(value), 500)
+
+  render() {
+    return (
+      <div className={css(styles.outer, util.flex, util.alignCenter)}>
+        <input
+          type='search'
+          placeholder='Search'
+          className={css(styles.input)}
+          onChange={(e) => this.handleChange(e.target.value)} />
+      </div>
+    )
+  }
+}
+
+export default enhance(SearchInput)
